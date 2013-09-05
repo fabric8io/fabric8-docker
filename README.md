@@ -3,7 +3,9 @@ fuse-dockerfiles
 
 Dockerfiles to create Fuse containers in docker.io
 
-Once you have [installed docker](https://www.docker.io/gettingstarted/#h_installation) you should be able to create the containers via:
+Once you have [installed docker](https://www.docker.io/gettingstarted/#h_installation) you should be able to create the containers via the following:
+
+If you are on OS X then see the [Building-OSX.md](https://github.com/jboss-fuse/fuse-dockerfiles/blob/master/Building-OSX.md#using-docker-on-os-x) document.
 
     git clone git@github.com:fusesource/fuse-dockerfiles.git
     cd fuse-dockerfiles
@@ -11,7 +13,6 @@ Once you have [installed docker](https://www.docker.io/gettingstarted/#h_install
 
 Then you should have the various containers available to play with: java, fuee etc.
 
-If you are on OS X then see the [Building-OSX.md]() document.
 
 Images
 ------
@@ -32,10 +33,18 @@ To run Fuse standalone:
 
 the current shell will then join this process and show the current logs etc.
 
-To run it detacked use:
+To run it detatched use:
 
     sudo docker run -d jboss-fuse:fuse-standalone
 
+e.g. to startup 5 Fuse instances; each will get their own IP address etc:
+
+    sudo docker run -d jboss-fuse:fuse-standalone
+    sudo docker run -d jboss-fuse:fuse-standalone
+    sudo docker run -d jboss-fuse:fuse-standalone
+    sudo docker run -d jboss-fuse:fuse-standalone
+    sudo docker run -d jboss-fuse:fuse-standalone
+    
 You can then run **docker attach** or **docker logs** to get the logs at any time.
 
 In another shell you can run **docker ps** to see all the running containers or **docker inspect $containerID** to view the IP address and details of a container
