@@ -39,16 +39,25 @@ Its useful to share a directory between your OS X host operating system and the 
 then create whatever shared directory you want to use:
 
     sudo mkdir /vmshare
+    chgrp staff /vmshare
+    cd /vmshare
+    git clone git@github.com:jboss-fuse/fuse-dockerfiles.git
 
 then spin up your docker vm image via vagrant:	
 
-		vagrant up
+    vagrant up
 
 Then in any shell connect to the docker vm via:
 
-		vagrant ssh
+    vagrant ssh
 
 You will then be able to connect to your docker vm via the IP address "10.10.10.10".
+
+To then build the docker files locally try:
+
+    vagrant ssh
+    cd /vmshare/fuse-dockerfiles
+    ./build.sh
 
 To be able to work with the REST API for your docker image you could then kill the docker process and restart it like this:
 
