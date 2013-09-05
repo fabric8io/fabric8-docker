@@ -8,3 +8,8 @@ RUN curl --silent --output fuse-fabric.zip http://repo.fusesource.com/nexus/cont
 RUN bsdtar -xzf fuse-fabric.zip 
 RUN mv fuse-fabric-7.3.0.redhat-053 fuse-fabric
 RUN rm fuse-fabric.zip
+
+WORKDIR /home/fuse/fuse-fabric
+
+RUN echo >> etc/users.properties 
+RUN echo admin=admin,admin >> etc/users.properties 
