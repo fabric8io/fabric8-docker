@@ -1,6 +1,6 @@
 FROM java
 
-RUN useradd -m fuse
+#RUN useradd -m fuse
 
 WORKDIR /home/fuse
 
@@ -8,8 +8,22 @@ RUN curl --silent --output fuse-fabric.zip http://repo.fusesource.com/nexus/cont
 RUN bsdtar -xzf fuse-fabric.zip 
 RUN mv fuse-fabric-7.3.0.redhat-053 fuse-fabric
 RUN rm fuse-fabric.zip
+#RUN chown -R fuse fuse-fabric
+
+WORKDIR /home/fuse/fuse-fabric/etc
+
+# lets add a user - should ideally come from env vars?
+RUN echo >> users.properties 
+RUN echo admin=admin,admin >> users.properties 
+
+# lets replace the dodgy 0.0.0.0 hostname
+RUN sed -i "s/0\.0\.0\.0/localhost/g" *
+
+# workaround to be able to resolve localhost from within Java
+# RUN sed -i "s/^127.0.0.1/127.0.0.1 $(hostname) /" /etc/hosts
 
 WORKDIR /home/fuse/fuse-fabric
 
-RUN echo >> etc/users.properties 
-RUN echo admin=admin,admin >> etc/users.properties 
+EXPOSE 8080 8101 
+
+
