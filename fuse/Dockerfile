@@ -1,4 +1,4 @@
-FROM java
+FROM jboss-fuse:java
 
 #RUN useradd -m fuse
 
@@ -17,10 +17,10 @@ RUN echo >> users.properties
 RUN echo admin=admin,admin >> users.properties 
 
 # lets replace the dodgy 0.0.0.0 hostname
-RUN sed -i "s/0\.0\.0\.0/localhost/g" *
+RUN sed -i "s/0\.0\.0\.0/$HOSTNAME/g" *
 
 # workaround to be able to resolve localhost from within Java
-# RUN sed -i "s/^127.0.0.1/127.0.0.1 $(hostname) /" /etc/hosts
+# RUN sed -i "s/^127.0.0.1/127.0.0.1 $HOSTNAME /" /etc/hosts
 
 WORKDIR /home/fuse/fuse-fabric
 
