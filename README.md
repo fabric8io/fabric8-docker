@@ -1,7 +1,7 @@
 fuse-dockerfiles
 ================
 
-Dockerfiles to create Fuse containers in docker.io
+Dockerfiles to create Fuse containers in [docker.io](http://docker.io/)
 
 Once you have [installed docker](https://www.docker.io/gettingstarted/#h_installation) you should be able to create the containers via the following:
 
