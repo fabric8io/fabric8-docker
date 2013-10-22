@@ -4,9 +4,9 @@ FROM jboss-fuse:java
 
 WORKDIR /home/fuse
 
-RUN curl --silent --output fuse-fabric.zip http://repo.fusesource.com/nexus/content/repositories/jboss-fuse-6.1.x/org/fusesource/fabric/fuse-fabric/7.3.0.redhat-129/fuse-fabric-7.3.0.redhat-129.zip
+RUN curl --silent --output fuse-fabric.zip http://repo.fusesource.com/nexus/content/repositories/jboss-fuse-6.1.x/org/fusesource/fabric/fuse-fabric/7.3.0.redhat-130/fuse-fabric-7.3.0.redhat-130.zip
 RUN bsdtar -xzf fuse-fabric.zip 
-RUN mv fuse-fabric-7.3.0.redhat-129 fuse-fabric
+RUN mv fuse-fabric-7.3.0.redhat-130 fuse-fabric
 RUN rm fuse-fabric.zip
 #RUN chown -R fuse fuse-fabric
 
