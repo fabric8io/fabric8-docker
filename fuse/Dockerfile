@@ -22,6 +22,6 @@ WORKDIR /home/fuse/fabric8
 RUN mkdir -p data/log
 RUN echo >> data/log/karaf.log
 
-EXPOSE 8181 8101 
+EXPOSE 8181 8101 1099 2181 9300 61616
 
 
