@@ -20,7 +20,7 @@ However if you are on OS X remember that the port forwarding will be bound to $D
 
 e.g. if you use a fixed port...
 
-   docker run -p 58181:8181 <img> <cmd>
+    docker run -p 58181:8181 <img> <cmd>
      
 then connect on $DOCKER_HOST:58181. Which tends to be something like http://192.168.42.43:58181/
 
