@@ -1,44 +1,35 @@
 Using Docker on OS X
 --------------------
 
-If you are working on OS X you might want to use vagrant to run docker via [these instructions](http://docs.docker.io/en/latest/installation/vagrant/).
+If you are working on OS X then please use [dvm]() and the native docker client for OS X.
 
-    git clone https://github.com/dotcloud/docker.git
-    cd docker
+Here are the [installation instructions](http://hw-ops.com/blog/2014/01/07/introducing-dvm-docker-in-a-box-for-unsupported-platforms/)
 
-Its useful to share a directory between your OS X host operating system and the vagrant vm image. To do this edit the docker/Vagrantfile and add this:
+You may wish to add this to your ~/.bashrc
 
-
-    Vagrant::Config.run do |config|
-      # share some files...
-      config.vm.network :hostonly, "10.10.10.10"
-      config.vm.share_folder("vagrant-root", "/vmshare", "/vmshare")
-
-then create whatever shared directory you want to use:
-
-    sudo mkdir /vmshare
-
-then spin up your docker vm image via vagrant:  
-
-    vagrant up
-
-Then in any shell connect to the docker vm via:
-
-    vagrant ssh
-
-You will then be able to connect to your docker vm via the IP address "10.10.10.10".
-
-To be able to work with the REST API for your docker image you could then kill the docker process and restart it like this:
-
-    /usr/bin/docker -H unix:///var/run/docker.sock -H tcp://10.10.10.10:4243 -d
+    eval $(dvm env)
     
-you'll then be able to run the command line stuff as usual as well as connecting over REST via http://10.10.10.10:4243 
+then in any shell you can just run docker commands and they connect correctly to the VM at $DOCKER_HOST
 
-e.g. try look at [http://10.10.10.10:4243/images/json](http://10.10.10.10:4243/images/json) for the images.
+Port forwarding
+===============
 
-To make this change on the ubuntu image edit the file **/etc/init/docker.conf**. 
+To be able to access the containers you create in docker from OS X you need to use [port forwarding](http://docs.docker.io/en/latest/use/port_redirection/) when you start a docker container.
 
-Then use **initctl** to stop/reload/start the docker process.
+However if you are on OS X remember that the port forwarding will be bound to $DOCKER_HOST so connect using that host name and the dynamic bound port or static port you give it.
 
-    initctl reload docker
-    initctl start docker
+e.g. if you use a fixed port...
+
+   docker run -p 58181:8181 <img> <cmd>
+     
+then connect on $DOCKER_HOST:58181. Which tends to be something like http://192.168.42.43:58181/
+
+However if you omit the "58181:" prefix...
+
+    docker run -p 8181 <img> <cmd>
+
+then docker will allocate a port. To find the actual port type
+
+    docker ps
+    
+and you should see it

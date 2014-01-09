@@ -1,5 +1,5 @@
 FROM jboss-fuse:fuse
 
-WORKDIR /home/fuse/fuse-fabric
+WORKDIR /home/fuse/fabric8
 
-CMD /home/fuse/fuse-fabric/bin/start && tail -f /home/fuse/fuse-fabric/data/log/karaf.log
+CMD /home/fuse/fabric8/bin/start && tail -f /home/fuse/fabric8/data/log/karaf.log

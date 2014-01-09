@@ -29,21 +29,21 @@ Running Fuse Standalone
 
 To run Fuse standalone:
 
-    sudo docker run jboss-fuse:fuse-standalone
+    docker run -p 8181 jboss-fuse:fuse-standalone
 
 the current shell will then join this process and show the current logs etc.
 
 To run it detatched use:
 
-    sudo docker run -d jboss-fuse:fuse-standalone
+    docker run -d -p 8181 jboss-fuse:fuse-standalone
 
 e.g. to startup 5 Fuse instances; each will get their own IP address etc:
 
-    sudo docker run -d jboss-fuse:fuse-standalone
-    sudo docker run -d jboss-fuse:fuse-standalone
-    sudo docker run -d jboss-fuse:fuse-standalone
-    sudo docker run -d jboss-fuse:fuse-standalone
-    sudo docker run -d jboss-fuse:fuse-standalone
+    docker run -d -p 8181 jboss-fuse:fuse-standalone
+    docker run -d -p 8181 jboss-fuse:fuse-standalone
+    docker run -d -p 8181 jboss-fuse:fuse-standalone
+    docker run -d -p 8181 jboss-fuse:fuse-standalone
+    docker run -d -p 8181 jboss-fuse:fuse-standalone
     
 You can then run **docker attach** or **docker logs** to get the logs at any time.
 
@@ -55,8 +55,8 @@ Experimenting
 
 To spin up a shell in one of the containers try:
 
-    sudo docker run -i -t jboss-fuse:java /bin/bash
-    sudo docker run -i -t jboss-fuse:fuse /bin/bash
+    docker run -p 8181 -i -t jboss-fuse:java /bin/bash
+    docker run -p 8181 -i -t jboss-fuse:fuse /bin/bash
 
 You can then noodle around the container and run stuff & look at files etc.
 
