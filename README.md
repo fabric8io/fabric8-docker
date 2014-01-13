@@ -1,14 +1,14 @@
-fuse-dockerfiles
-================
+fabric8-dockerfiles
+===================
 
-Dockerfiles to create Fuse containers in [docker.io](http://docker.io/)
+Dockerfiles to create [fabric8](http://fabric8.io/) containers in [docker.io](http://docker.io/)
 
 Once you have [installed docker](https://www.docker.io/gettingstarted/#h_installation) you should be able to create the containers via the following:
 
 If you are on OS X then see the [Building-OSX.md](https://github.com/jboss-fuse/fuse-dockerfiles/blob/master/Building-OSX.md#using-docker-on-os-x) document.
 
-    git clone git@github.com:fusesource/fuse-dockerfiles.git
-    cd fuse-dockerfiles
+    git clone git@github.com:fusesource/fabric8-dockerfiles.git
+    cd fabric8-dockerfiles
     ./build
 
 Then you should have the various containers available to play with: java, fuee etc.
@@ -18,32 +18,29 @@ Images
 ------
 
 * **java**: creates a container which has a JVM installed with JAVA_HOME set etc
-* **fuse**: installs a fuse-fabric distro into /home/fuse/fuse-fabric
-* **fuse-standalone**: a running stand alone JBoss Fuse container
-* **fuse-fabric**: runs a Fuse Fabric Registry (auto-creating a ZooKeeper ensemble)
-* **fuse-join**: runs a Fuse container and joins an existing Fuse Fabric
+* **fabric8**: installs a fabric8 distro into /home/fuse/fabric7
     
     
-Running Fuse Standalone
------------------------
+Running Fabric8
+---------------
 
-To run Fuse standalone:
+To run a fabric8 container:
 
-    docker run -p 8181 jboss-fuse:fuse-standalone
+    docker run -p 8181 fabric8:fabric8
 
 the current shell will then join this process and show the current logs etc.
 
 To run it detatched use:
 
-    docker run -d -p 8181 jboss-fuse:fuse-standalone
+    docker run -d -p 8181 fabric8:fabric8
 
-e.g. to startup 5 Fuse instances; each will get their own IP address etc:
+e.g. to startup 5 Fabric8 instances; each will get their own IP address etc:
 
-    docker run -d -p 8181 jboss-fuse:fuse-standalone
-    docker run -d -p 8181 jboss-fuse:fuse-standalone
-    docker run -d -p 8181 jboss-fuse:fuse-standalone
-    docker run -d -p 8181 jboss-fuse:fuse-standalone
-    docker run -d -p 8181 jboss-fuse:fuse-standalone
+    docker run -d -p 8181 fabric8:fabric8
+    docker run -d -p 8181 fabric8:fabric8
+    docker run -d -p 8181 fabric8:fabric8
+    docker run -d -p 8181 fabric8:fabric8
+    docker run -d -p 8181 fabric8:fabric8
     
 You can then run **docker attach** or **docker logs** to get the logs at any time.
 
@@ -55,8 +52,7 @@ Experimenting
 
 To spin up a shell in one of the containers try:
 
-    docker run -p 8181 -i -t jboss-fuse:java /bin/bash
-    docker run -p 8181 -i -t jboss-fuse:fuse /bin/bash
+    docker run -p 8181 -i -t fabric8:fabric8 /bin/bash
 
 You can then noodle around the container and run stuff & look at files etc.
 
