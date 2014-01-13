@@ -56,3 +56,7 @@ To spin up a shell in one of the containers try:
 
 You can then noodle around the container and run stuff & look at files etc.
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/fabric8io/fabric8-dockerfiles/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
