@@ -4,9 +4,9 @@ FROM jboss-fuse:java
 
 WORKDIR /home/fuse
 
-RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/ea/io/fabric8/fuse-fabric/1.0.0.redhat-312/fuse-fabric-1.0.0.redhat-312.zip
+RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/ea/io/fabric8/fuse-fabric/1.0.0.redhat-313/fuse-fabric-1.0.0.redhat-313.zip
 RUN bsdtar -xzf fabric8.zip 
-RUN mv fuse-fabric-1.0.0.redhat-312 fabric8
+RUN mv fuse-fabric-1.0.0.redhat-313 fabric8
 RUN rm fabric8.zip
 #RUN chown -R fuse fabric8
 
