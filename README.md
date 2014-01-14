@@ -10,7 +10,7 @@ If you have docker installed you should be able to try it out via
 
     docker run -p 8181 -d -t fabric8/fabric8
 
-If you are on OS X then see the [Building-OSX.md](https://github.com/jboss-fuse/fuse-dockerfiles/blob/master/Building-OSX.md#using-docker-on-os-x) document.
+If you are on OS X then see [How to use Docker on OS X](DockerOnOSX.md).
 
 e.g. to startup 5 Fabric8 instances; each will get their own IP address etc:
 
@@ -32,7 +32,7 @@ We have a Docker Index trusted build setup to automatically rebuild the fabric8/
 
 Once you have [installed docker](https://www.docker.io/gettingstarted/#h_installation) you should be able to create the containers via the following:
 
-If you are on OS X then see the [Building-OSX.md](https://github.com/jboss-fuse/fuse-dockerfiles/blob/master/Building-OSX.md#using-docker-on-os-x) document.
+If you are on OS X then see [How to use Docker on OS X](DockerOnOSX.md).
 
     git clone git@github.com:fusesource/fabric8-docker.git
     cd fabric8-docker
