@@ -11,13 +11,17 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/jre
 
 WORKDIR /home/fuse
 
-RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/ea/io/fabric8/fuse-fabric/1.0.0.redhat-312/fuse-fabric-1.0.0.redhat-312.zip
+RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/ea/io/fabric8/fabric8-karaf/1.0.0.redhat-340/fabric8-karaf-1.0.0.redhat-340.zip
 RUN bsdtar -xzf fabric8.zip 
-RUN mv fuse-fabric-1.0.0.redhat-312 fabric8
+RUN mv fabric8-karaf-1.0.0.redhat-340 fabric8
+#RUN mv fabric8-karaf-1.0.0-SNAPSHOT fabric8
 RUN rm fabric8.zip
 #RUN chown -R fuse fabric8
 
 WORKDIR /home/fuse/fabric8/etc
+
+# lets remove the karaf.name by default so we can default it from env vars
+RUN sed -i '/karaf.name=root/d' system.properties 
 
 # lets add a user - should ideally come from env vars?
 RUN echo >> users.properties 

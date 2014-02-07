@@ -1,7 +1,7 @@
 fabric8-docker
 ==============
 
-This project builds a [docker](http://docker.io/) container for running [fabric8](http://fabric8.io/)/
+This project builds a [docker](http://docker.io/) container for running [fabric8](http://fabric8.io/)
 
 Try it out
 ----------

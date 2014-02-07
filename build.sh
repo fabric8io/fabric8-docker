@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-echo "building the Docker containers for Fuse and Fuse Fabric"
+echo "building the Docker container for http://fabric8.io/"
 docker build -t fabric8:fabric8 .
 
