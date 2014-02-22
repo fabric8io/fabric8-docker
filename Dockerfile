@@ -27,6 +27,9 @@ RUN sed -i '/karaf.name=root/d' system.properties
 RUN echo >> users.properties 
 RUN echo admin=admin,admin >> users.properties 
 
+# lets enable logging to standard out
+RUN echo log4j.rootLogger=INFO, stdout, osgi:* >> org.ops4j.pax.logging.cfg 
+
 WORKDIR /home/fuse/fabric8
 
 # ensure we have a log file to tail 
@@ -35,6 +38,6 @@ RUN echo >> data/log/karaf.log
 
 EXPOSE 8181 8101 1099 2181 9300 61616
 
-CMD /home/fuse/fabric8/bin/start && tail -f /home/fuse/fabric8/data/log/karaf.log
+CMD echo "starting Fabric8 container: $FABRIC8_KARAF_NAME connecting to ZooKeeper: $FABRIC8_ZOOKEEPER_URL" && /home/fuse/fabric8/bin/karaf server
 
 
