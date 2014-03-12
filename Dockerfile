@@ -11,9 +11,9 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/jre
 
 WORKDIR /home/fuse
 
-RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/ea/io/fabric8/fabric8-karaf/1.0.0.redhat-349/fabric8-karaf-1.0.0.redhat-349.zip
+RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/ea/io/fabric8/fabric8-karaf/1.0.0.redhat-362/fabric8-karaf-1.0.0.redhat-362.zip
 RUN bsdtar -xzf fabric8.zip 
-RUN mv fabric8-karaf-1.0.0.redhat-349 fabric8
+RUN mv fabric8-karaf-1.0.0.redhat-362 fabric8
 #RUN mv fabric8-karaf-1.0.0-SNAPSHOT fabric8
 RUN rm fabric8.zip
 #RUN chown -R fuse fabric8
