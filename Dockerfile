@@ -6,6 +6,7 @@ RUN apt-get install -y openjdk-7-jre-headless curl bsdtar
 #RUN echo "JAVA_HOME=/usr/lib/jvm/java-7-oracle" >> /etc/environment
 
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/jre
+ENV FABRIC8_KARAF_NAME root
 
 #RUN useradd -m fuse
 
