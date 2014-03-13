@@ -12,9 +12,9 @@ ENV FABRIC8_KARAF_NAME root
 
 WORKDIR /home/fuse
 
-RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/ea/io/fabric8/fabric8-karaf/1.0.0.redhat-362/fabric8-karaf-1.0.0.redhat-362.zip
+RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/ea/io/fabric8/fabric8-karaf/1.0.0.redhat-365/fabric8-karaf-1.0.0.redhat-365.zip
 RUN bsdtar -xzf fabric8.zip 
-RUN mv fabric8-karaf-1.0.0.redhat-362 fabric8
+RUN mv fabric8-karaf-1.0.0.redhat-365 fabric8
 #RUN mv fabric8-karaf-1.0.0-SNAPSHOT fabric8
 RUN rm fabric8.zip
 #RUN chown -R fuse fabric8
@@ -37,7 +37,7 @@ WORKDIR /home/fuse/fabric8
 RUN mkdir -p data/log
 RUN echo >> data/log/karaf.log
 
-EXPOSE 8181 8101 1099 2181 9300 61616
+EXPOSE 1099 2181 8181 8101 1099 9300 9301 44444 61616 
 
 CMD echo "starting Fabric8 container: $FABRIC8_KARAF_NAME connecting to ZooKeeper: $FABRIC8_ZOOKEEPER_URL" && /home/fuse/fabric8/bin/karaf server
 
