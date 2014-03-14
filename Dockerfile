@@ -23,6 +23,8 @@ WORKDIR /home/fuse/fabric8/etc
 
 # lets remove the karaf.name by default so we can default it from env vars
 RUN sed -i '/karaf.name=root/d' system.properties 
+RUN echo bind.address=127.0.0.1 >> system.properties
+RUN echo fabric.environment=docker >> system.properties
 
 # lets add a user - should ideally come from env vars?
 RUN echo >> users.properties 
@@ -39,6 +41,6 @@ RUN echo >> data/log/karaf.log
 
 EXPOSE 1099 2181 8181 8101 1099 9300 9301 44444 61616 
 
-CMD echo "starting Fabric8 container: $FABRIC8_KARAF_NAME connecting to ZooKeeper: $FABRIC8_ZOOKEEPER_URL" && /home/fuse/fabric8/bin/karaf server
+CMD echo "starting Fabric8 container: $FABRIC8_KARAF_NAME connecting to ZooKeeper: $FABRIC8_ZOOKEEPER_URL using environment: $FABRIC8_FABRIC_ENVIRONMENT" && /home/fuse/fabric8/bin/karaf server
 
 
