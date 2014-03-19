@@ -13,6 +13,7 @@ RUN sed -i 's/.*requiretty$/#Defaults requiretty/' /etc/sudoers
 ENV JAVA_HOME /usr/lib/jvm/jre
 
 ENV FABRIC8_KARAF_NAME root
+ENV FABRIC8_BINDADDRESS 0.0.0.0
 
 # add a user for the application, with sudo permissions
 RUN useradd -m fuse ; echo fuse: | chpasswd ; usermod -a -G wheel fuse
