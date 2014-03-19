@@ -37,7 +37,7 @@ WORKDIR /home/fuse/fabric8/etc
 # lets remove the karaf.name by default so we can default it from env vars
 RUN sed -i '/karaf.name=root/d' system.properties 
 
-RUN echo bind.address=127.0.0.1 >> system.properties
+RUN echo bind.address=0.0.0.0 >> system.properties
 RUN echo fabric.environment=docker >> system.properties
 
 # lets remove the karaf.delay.console=true to disable the progress bar
