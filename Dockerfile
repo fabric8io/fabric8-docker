@@ -1,31 +1,35 @@
-FROM base
+FROM centos
 
-RUN apt-get -q -y update
-RUN apt-get -q -y install openssh-server openjdk-7-jre-headless curl bsdtar
+# telnet is required by some fabric command. without it you have silent failures
+RUN yum install -y java-1.7.0-openjdk which telnet unzip openssh-server sudo openssh-clients
+# enable no pass and speed up authentication
+RUN sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords yes/;s/#UseDNS yes/UseDNS no/' /etc/ssh/sshd_config
 
-#RUN echo "JAVA_HOME=/usr/lib/jvm/java-7-oracle" >> /etc/environment
+# enabling sudo group
+RUN echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
+# enabling sudo over ssh
+RUN sed -i 's/.*requiretty$/#Defaults requiretty/' /etc/sudoers
 
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/jre
+ENV JAVA_HOME /usr/lib/jvm/jre
+
 ENV FABRIC8_KARAF_NAME root
 
-#RUN useradd -m fuse
+# add a user for the application, with sudo permissions
+RUN useradd -m fuse ; echo fuse: | chpasswd ; usermod -a -G wheel fuse
 
-# setup sshd capability
-RUN mkdir /var/run/sshd 
-RUN echo 'root:tcuser' |chpasswd
-
-RUN cat /root/.profile | grep mesg
-RUN sed -i 's/^mesg n$/tty -s \&\& mesg n/g' /root/.profile
-RUN cat /root/.profile | grep mesg
+# command line goodies
+RUN echo "export JAVA_HOME=/usr/lib/jvm/jre" >> /etc/profile
+RUN echo "alias ll='ls -l --color=auto'" >> /etc/profile
+RUN echo "alias grep='grep --color=auto'" >> /etc/profile
 
 
 WORKDIR /home/fuse
 
 RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/ea/io/fabric8/fabric8-karaf/1.0.0.redhat-366/fabric8-karaf-1.0.0.redhat-366.zip
-RUN bsdtar -xzf fabric8.zip 
+RUN unzip -q fabric8.zip 
 RUN mv fabric8-karaf-1.0.0.redhat-366 fabric8
 RUN rm fabric8.zip
-#RUN chown -R fuse fabric8
+RUN chown -R fuse:fuse fabric8
 
 WORKDIR /home/fuse/fabric8/etc
 
