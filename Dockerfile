@@ -30,7 +30,6 @@ RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/conten
 RUN unzip -q fabric8.zip 
 RUN mv fabric8-karaf-1.0.0.redhat-366 fabric8
 RUN rm fabric8.zip
-RUN chown -R fuse:fuse fabric8
 
 WORKDIR /home/fuse/fabric8/etc
 
@@ -59,6 +58,8 @@ RUN echo >> data/log/karaf.log
 
 RUN curl --silent --output startup.sh https://raw.github.com/fabric8io/fabric8-docker/master/startup.sh
 RUN chmod +x startup.sh
+
+RUN chown -R fuse:fuse .
 
 EXPOSE 22 1099 2181 8101 8181 9300 9301 44444 61616 
 
