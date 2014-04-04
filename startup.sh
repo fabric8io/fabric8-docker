@@ -10,6 +10,6 @@ echo Using bindaddress: $FABRIC8_BINDADDRESS
 service sshd start
 
 # TODO if enabled should we tail the karaf log to work nicer with docker logs?
-#tail -f /home/fuse/fabric8/data/log/karaf.log
+#tail -f /home/fabric8/data/log/karaf.log
 
-/home/fuse/fabric8/bin/karaf server
+sudo -u fabric8 /home/fabric8/fabric8-karaf/bin/karaf server
