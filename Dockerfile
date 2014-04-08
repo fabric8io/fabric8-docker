@@ -29,7 +29,7 @@ WORKDIR /home/fabric8
 
 USER fabric8
 
-RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/repositories/fs-snapshots/io/fabric8/fabric8-karaf/1.1.0-SNAPSHOT/fabric8-karaf-1.1.0-20140402.101838-12.zip
+RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/fs-public-snapshots/io/fabric8/fabric8-karaf/1.1.0-SNAPSHOT/fabric8-karaf-1.1.0-20140408.090633-16.zip
 #RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/ea/io/fabric8/fabric8-karaf/1.0.0.redhat-366/fabric8-karaf-1.0.0.redhat-366.zip
 RUN unzip -q fabric8.zip 
 RUN ls -al
