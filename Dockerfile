@@ -66,7 +66,7 @@ RUN echo >> data/log/karaf.log
 
 WORKDIR /home/fabric8
 
-RUN curl --silent --output startup.sh https://raw.githubusercontent.com/fabric8io/fabric8-docker/6b57c41daea44af9783041026803729853298c85/startup.sh
+RUN curl --silent --output startup.sh https://raw.githubusercontent.com/fabric8io/fabric8-docker/c9583367e3da4ca7adfc535107b9dc9ce07589d0/startup.sh
 RUN chmod +x startup.sh
 
 EXPOSE 22 1099 2181 8101 8181 9300 9301 44444 61616 
