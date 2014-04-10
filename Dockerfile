@@ -29,12 +29,12 @@ WORKDIR /home/fabric8
 
 USER fabric8
 
-RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/fs-public-snapshots/io/fabric8/fabric8-karaf/1.1.0-SNAPSHOT/fabric8-karaf-1.1.0-20140408.090633-16.zip
-#RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/ea/io/fabric8/fabric8-karaf/1.0.0.redhat-366/fabric8-karaf-1.0.0.redhat-366.zip
+#RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/fs-public-snapshots/io/fabric8/fabric8-karaf/1.1.0-SNAPSHOT/fabric8-karaf-1.1.0-20140408.090633-16.zip
+RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/repositories/fs-public/io/fabric8/fabric8-karaf/1.1.0.Beta1/fabric8-karaf-1.1.0.Beta1.zip
 RUN unzip -q fabric8.zip 
 RUN ls -al
-RUN mv fabric8-karaf-1.1.0-SNAPSHOT fabric8-karaf
-#RUN mv fabric8-karaf-1.0.0.redhat-366 fabric8-karaf
+#RUN mv fabric8-karaf-1.1.0-SNAPSHOT fabric8-karaf
+RUN mv fabric8-karaf-1.1.0.Beta1 fabric8-karaf
 RUN rm fabric8.zip
 #RUN chown -R fabric8:fabric8 fabric8-karaf
 
@@ -45,6 +45,7 @@ RUN sed -i '/karaf.name=root/d' system.properties
 
 RUN echo bind.address=0.0.0.0 >> system.properties
 RUN echo fabric.environment=docker >> system.properties
+RUN echo zookeeper.password.encode=true >> system.properties
 
 # lets remove the karaf.delay.console=true to disable the progress bar
 RUN sed -i '/karaf.delay.console=true/d' config.properties 
