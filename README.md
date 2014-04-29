@@ -8,7 +8,7 @@ Try it out
 
 If you have docker installed you should be able to try it out via
 
-    docker run -p 8181 -d -t fabric8/fabric8
+    docker run -P -d -t fabric8/fabric8
 
 You can pass in various [environment variables](http://fabric8.io/#/site/book/doc/index.md?chapter=environmentVariables_md) to customise how a fabric is created or joined; or specify stand alone mode if required etc.
 
@@ -16,11 +16,11 @@ If you are on OS X then see [How to use Docker on OS X](DockerOnOSX.md).
 
 e.g. to startup 5 Fabric8 instances; each will get their own IP address etc:
 
-    docker run -d -p 8181 fabric8/fabric8
-    docker run -d -p 8181 fabric8/fabric8
-    docker run -d -p 8181 fabric8/fabric8
-    docker run -d -p 8181 fabric8/fabric8
-    docker run -d -p 8181 fabric8/fabric8
+    docker run -d -P fabric8/fabric8
+    docker run -d -P fabric8/fabric8
+    docker run -d -P fabric8/fabric8
+    docker run -d -P fabric8/fabric8
+    docker run -d -P fabric8/fabric8
     
 You can then run **docker attach** or **docker logs** to get the logs at any time.
 
@@ -47,7 +47,7 @@ Experimenting
 
 To spin up a shell in one of the containers try:
 
-    docker run -p 8181 -i -t fabric8:fabric8 /bin/bash
+    docker run -P -i -t fabric8:fabric8 /bin/bash
 
 You can then noodle around the container and run stuff & look at files etc.
 
