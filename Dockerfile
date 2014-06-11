@@ -29,12 +29,11 @@ WORKDIR /home/fabric8
 
 USER fabric8
 
-#RUN curl --silent --output fabric8.zip https://repository.jboss.org/nexus/content/groups/fs-public-snapshots/io/fabric8/fabric8-karaf/1.1.0-SNAPSHOT/fabric8-karaf-1.1.0-20140408.090633-16.zip
-RUN curl --silent --output fabric8.zip http://central.maven.org/maven2/io/fabric8/fabric8-karaf/1.1.0.Beta4/fabric8-karaf-1.1.0.Beta4.zip
+RUN curl --silent --output fabric8.zip http://central.maven.org/maven2/io/fabric8/fabric8-karaf/1.1.0.CR1/fabric8-karaf-1.1.0.CR1.zip
 RUN unzip -q fabric8.zip 
 RUN ls -al
 #RUN mv fabric8-karaf-1.1.0-SNAPSHOT fabric8-karaf
-RUN mv fabric8-karaf-1.1.0.Beta4 fabric8-karaf
+RUN mv fabric8-karaf-1.1.0.CR1 fabric8-karaf
 RUN rm fabric8.zip
 #RUN chown -R fabric8:fabric8 fabric8-karaf
 
