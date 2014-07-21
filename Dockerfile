@@ -1,14 +1,10 @@
-FROM centos
+FROM fedora
 
 # telnet is required by some fabric command. without it you have silent failures
-RUN yum install -y java-1.7.0-openjdk which telnet unzip openssh-server sudo openssh-clients
-# enable no pass and speed up authentication
-RUN sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords yes/;s/#UseDNS yes/UseDNS no/' /etc/ssh/sshd_config
+RUN yum install -y java-1.7.0-openjdk unzip
 
-# enabling sudo group
-RUN echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
-# enabling sudo over ssh
-RUN sed -i 's/.*requiretty$/#Defaults requiretty/' /etc/sudoers
+# Clean the metadata
+RUN yum clean all
 
 ENV JAVA_HOME /usr/lib/jvm/jre
 
