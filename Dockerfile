@@ -3,6 +3,9 @@ FROM fedora
 # telnet is required by some fabric command. without it you have silent failures
 RUN yum install -y java-1.7.0-openjdk unzip
 
+#set the fabric8 version env variable
+ENV FABRIC8_VERSION 1.1.0.CR5
+
 # Clean the metadata
 RUN yum clean all
 
@@ -25,11 +28,13 @@ WORKDIR /home/fabric8
 
 USER fabric8
 
-RUN curl --silent --output fabric8.zip http://central.maven.org/maven2/io/fabric8/fabric8-karaf/1.1.0.CR3/fabric8-karaf-1.1.0.CR3.zip
+# temporarily use the jboss nexus while the release syncs
+#RUN curl --silent --output fabric8.zip http://central.maven.org/maven2/io/fabric8/fabric8-karaf/$FABRIC8_VERSION/fabric8-karaf-$FABRIC8_VERSION.zip
+RUN curl --silent --output fabric8.zip http://repository.jboss.org/nexus/content/repositories/fusesource_releases_to_central_public-1097/io/fabric8/fabric8-karaf/$FABRIC8_VERSION/fabric8-karaf-$FABRIC8_VERSION.zip
 RUN unzip -q fabric8.zip 
 RUN ls -al
 #RUN mv fabric8-karaf-1.1.0-SNAPSHOT fabric8-karaf
-RUN mv fabric8-karaf-1.1.0.CR3 fabric8-karaf
+RUN mv fabric8-karaf-$FABRIC8_VERSION fabric8-karaf
 RUN rm fabric8.zip
 #RUN chown -R fabric8:fabric8 fabric8-karaf
 
