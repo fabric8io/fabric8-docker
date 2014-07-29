@@ -47,7 +47,7 @@ Experimenting
 
 To spin up a shell in one of the containers try:
 
-    docker run -P -i -t fabric8:fabric8 /bin/bash
+    docker run -P -i -t fabric8/fabric8 /bin/bash
 
 You can then noodle around the container and run stuff & look at files etc.
 
