@@ -40,6 +40,9 @@ RUN mv fabric8-karaf-$FABRIC8_DISTRO_VERSION fabric8-karaf
 RUN rm fabric8.zip
 #RUN chown -R fabric8:fabric8 fabric8-karaf
 
+# temporary fix for docker issue until 1.2.0.Beta3
+ADD jetty.xml /home/fabric8/fabric8-karaf/fabric/import/fabric/profiles/default.profile/jetty.xml
+
 WORKDIR /home/fabric8/fabric8-karaf/etc
 
 # lets remove the karaf.name by default so we can default it from env vars
@@ -69,7 +72,7 @@ RUN echo >> data/log/karaf.log
 
 WORKDIR /home/fabric8
 
-EXPOSE 22 1099 2181 8101 8181 9300 9301 44444 61616 
+EXPOSE 1099 2181 8101 8181 9300 9301 44444 61616 
 
 USER root
 

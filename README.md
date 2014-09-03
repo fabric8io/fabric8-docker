@@ -27,6 +27,13 @@ You can then run **docker attach** or **docker logs** to get the logs at any tim
 Run  **docker ps** to see all the running containers or **docker inspect $containerID** to view the IP address and details of a container
 
 
+Using the interactive shell
+---------------------------
+
+If you want to run the docker container a bit more like running the bin/fabric8 command where you get an interactive colourful ssh shell on the command line then try this:
+
+    docker run -P -it fabric8/fabric8 /home/fabric8/fabric8-karaf/bin/fabric8
+
 Building the docker container locally
 -------------------------------------
 
