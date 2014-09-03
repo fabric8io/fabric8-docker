@@ -8,9 +8,11 @@ Try it out
 
 If you have docker installed you should be able to try it out via
 
-    docker run -P -d -t fabric8/fabric8
+    docker run -P -dt -e DOCKER_HOST=http://192.168.59.103:2375 fabric8/fabric8
 
-You can pass in various [environment variables](http://fabric8.io/#/site/book/doc/index.md?chapter=environmentVariables_md) to customise how a fabric is created or joined; or specify stand alone mode if required etc.
+Where the value of DOCKER_HOST should be the URL (ideally http) where the docker container can access the [Docker Remote API](https://docs.docker.com/reference/api/docker_remote_api/) to be able to create/start/stop containers in docker.
+
+You can pass in various [environment variables](http://fabric8.io/gitbook/environmentVariables.html) to customise how a fabric is created or joined; or specify stand alone mode if required etc.
 
 In addition, the Docker image allows you to override a few other things through environment variables:
 
@@ -18,16 +20,6 @@ In addition, the Docker image allows you to override a few other things through 
 * `ADMIN_PASSWORD`: the admin password to use (default: `admin`)
 * `DOCKER_HOST`: the URI to the Docker REST endpoint. This is necessary if you want to manage Docker containers from your Docker container :) (default: `tcp://172.17.42.1:4243`)
 
-If you are on OS X then see [How to use Docker on OS X](DockerOnOSX.md).
-
-e.g. to startup 5 Fabric8 instances; each will get their own IP address etc:
-
-    docker run -d -P fabric8/fabric8
-    docker run -d -P fabric8/fabric8
-    docker run -d -P fabric8/fabric8
-    docker run -d -P fabric8/fabric8
-    docker run -d -P fabric8/fabric8
-    
 You can then run **docker attach** or **docker logs** to get the logs at any time.
 
 Run  **docker ps** to see all the running containers or **docker inspect $containerID** to view the IP address and details of a container
@@ -60,7 +52,14 @@ Experimenting
 
 To spin up a shell in one of the containers try:
 
-    docker run -P -i -t fabric8/fabric8 /bin/bash
+    docker run -P -it fabric8/fabric8 /bin/bash
 
 You can then noodle around the container and run stuff & look at files etc.
+
+
+Docker resources
+----------------
+
+* If you are on OS X then see the [How to use Docker on OS X The Missing Guide](http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide) and [How to use Docker on OS X](DockerOnOSX.md).
+* Until docker exec is supported; you should look at using nsenter to get a shell inside a container instance. Check out this [awesome blog](http://ro14nd.de/NSEnter-with-Boot2Docker/) on how to do that.
 

@@ -5,23 +5,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends openjdk-7-jre-h
 ENV FABRIC8_DISTRO_VERSION 1.2.0.Beta2
 ENV JAVA_HOME /usr/lib/jvm/java-1.7.0-openjdk-amd64
 
-# default values of environment variables supplied by default for child containers created by fabric8
-ENV FABRIC8_RUNTIME_ID root
-ENV FABRIC8_KARAF_NAME root
-ENV FABRIC8_BINDADDRESS 0.0.0.0
-ENV FABRIC8_PROFILES docker
-ENV FABRIC8_HTTP_PORT 8181
-ENV FABRIC8_HTTP_PROXY_PORT 8181
-ENV FABRIC8_GLOBAL_RESOLVER localip
-
-# add a user for the application, with sudo permissions
 RUN useradd -m fabric8
+USER fabric8
 
 ADD startup.sh /home/fabric8/startup.sh
 
-USER fabric8
-
-# temporarily use the jboss nexus while the release syncs
 RUN cd /home/fabric8 && \
     curl --silent https://repo1.maven.org/maven2/io/fabric8/fabric8-karaf/$FABRIC8_DISTRO_VERSION/fabric8-karaf-$FABRIC8_DISTRO_VERSION.tar.gz | tar xz && \
     mv fabric8-karaf-$FABRIC8_DISTRO_VERSION fabric8-karaf && \
@@ -47,6 +35,20 @@ RUN sed -i 's/karaf.delay.console=true/karaf.delay.console=false/' config.proper
 RUN sed -i 's/log4j.rootLogger=INFO, out, osgi:*/log4j.rootLogger=INFO, stdout, osgi:*/' org.ops4j.pax.logging.cfg
 
 WORKDIR /home/fabric8/fabric8-karaf
+
+
+# default values of environment variables supplied by default for child containers created by fabric8
+# which have sensible defaults for folks creating new fabrics but can be overloaded when using docker run
+
+#ENV DOCKER_HOST http://172.17.42.1:4243
+ENV DOCKER_HOST http://192.168.59.103:2375
+ENV FABRIC8_RUNTIME_ID root
+ENV FABRIC8_KARAF_NAME root
+ENV FABRIC8_BINDADDRESS 0.0.0.0
+ENV FABRIC8_PROFILES docker
+ENV FABRIC8_HTTP_PORT 8181
+ENV FABRIC8_HTTP_PROXY_PORT 8181
+ENV FABRIC8_GLOBAL_RESOLVER localip
 
 EXPOSE 1099 2181 8101 8181 9300 9301 44444 61616
 
