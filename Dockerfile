@@ -6,7 +6,6 @@ ENV FABRIC8_DISTRO_VERSION 1.2.0.Beta2
 ENV JAVA_HOME /usr/lib/jvm/java-1.7.0-openjdk-amd64
 
 RUN useradd -m fabric8
-USER fabric8
 
 ADD startup.sh /home/fabric8/startup.sh
 
@@ -36,6 +35,10 @@ RUN sed -i 's/log4j.rootLogger=INFO, out, osgi:*/log4j.rootLogger=INFO, stdout, 
 
 WORKDIR /home/fabric8/fabric8-karaf
 
+RUN chown -R fabric8 /home/fabric8
+RUN chgrp -R fabric8 /home/fabric8
+
+USER fabric8
 
 # default values of environment variables supplied by default for child containers created by fabric8
 # which have sensible defaults for folks creating new fabrics but can be overloaded when using docker run
