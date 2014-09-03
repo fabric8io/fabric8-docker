@@ -2,7 +2,7 @@
 
 echo Welcome to fabric8: http://fabric8.io/
 echo
-echo Starting Fabric8 container: $FABRIC8_KARAF_NAME 
+echo Starting Fabric8 container ID: $FABRIC8_RUNTIME_ID
 echo Connecting to ZooKeeper: $FABRIC8_ZOOKEEPER_URL using environment: $FABRIC8_FABRIC_ENVIRONMENT
 echo Using bindaddress: $FABRIC8_BINDADDRESS
 

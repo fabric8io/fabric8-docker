@@ -4,13 +4,14 @@ FROM fedora
 RUN yum install -y java-1.7.0-openjdk unzip
 
 #set the fabric8 version env variable
-ENV FABRIC8_VERSION 1.1.0.CR5
+ENV FABRIC8_DISTRO_VERSION 1.2.0.Beta2
 
 # Clean the metadata
 RUN yum clean all
 
 ENV JAVA_HOME /usr/lib/jvm/jre
 
+ENV FABRIC8_RUNTIME_ID root
 ENV FABRIC8_KARAF_NAME root
 ENV FABRIC8_BINDADDRESS 0.0.0.0
 ENV FABRIC8_PROFILES docker
@@ -26,15 +27,16 @@ RUN echo "alias grep='grep --color=auto'" >> /etc/profile
 
 WORKDIR /home/fabric8
 
+ADD startup.sh /home/fabric8/startup.sh
+RUN chmod +x startup.sh
+
 USER fabric8
 
 # temporarily use the jboss nexus while the release syncs
-#RUN curl --silent --output fabric8.zip http://central.maven.org/maven2/io/fabric8/fabric8-karaf/$FABRIC8_VERSION/fabric8-karaf-$FABRIC8_VERSION.zip
-RUN curl --silent --output fabric8.zip http://repository.jboss.org/nexus/content/repositories/fusesource_releases_to_central_public-1097/io/fabric8/fabric8-karaf/$FABRIC8_VERSION/fabric8-karaf-$FABRIC8_VERSION.zip
+RUN curl --silent --output fabric8.zip http://central.maven.org/maven2/io/fabric8/fabric8-karaf/$FABRIC8_DISTRO_VERSION/fabric8-karaf-$FABRIC8_DISTRO_VERSION.zip
 RUN unzip -q fabric8.zip 
 RUN ls -al
-#RUN mv fabric8-karaf-1.1.0-SNAPSHOT fabric8-karaf
-RUN mv fabric8-karaf-$FABRIC8_VERSION fabric8-karaf
+RUN mv fabric8-karaf-$FABRIC8_DISTRO_VERSION fabric8-karaf
 RUN rm fabric8.zip
 #RUN chown -R fabric8:fabric8 fabric8-karaf
 
@@ -42,6 +44,7 @@ WORKDIR /home/fabric8/fabric8-karaf/etc
 
 # lets remove the karaf.name by default so we can default it from env vars
 RUN sed -i '/karaf.name=root/d' system.properties 
+RUN sed -i '/runtime.id=/d' system.properties 
 
 RUN echo bind.address=0.0.0.0 >> system.properties
 RUN echo fabric.environment=docker >> system.properties
@@ -65,9 +68,6 @@ RUN mkdir -p data/log
 RUN echo >> data/log/karaf.log
 
 WORKDIR /home/fabric8
-
-RUN curl --silent --output startup.sh https://raw.githubusercontent.com/fabric8io/fabric8-docker/c9583367e3da4ca7adfc535107b9dc9ce07589d0/startup.sh
-RUN chmod +x startup.sh
 
 EXPOSE 22 1099 2181 8101 8181 9300 9301 44444 61616 
 
