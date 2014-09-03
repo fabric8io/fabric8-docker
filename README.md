@@ -12,6 +12,12 @@ If you have docker installed you should be able to try it out via
 
 You can pass in various [environment variables](http://fabric8.io/#/site/book/doc/index.md?chapter=environmentVariables_md) to customise how a fabric is created or joined; or specify stand alone mode if required etc.
 
+In addition, the Docker image allows you to override a few other things through environment variables:
+
+* `ADMIN_USERNAME`: the admin username you can use to connect to the Karaf shell as & authenticate to HawtIO (default: `admin`)
+* `ADMIN_PASSWORD`: the admin password to use (default: `admin`)
+* `DOCKER_HOST`: the URI to the Docker REST endpoint. This is necessary if you want to manage Docker containers from your Docker container :) (default: `tcp://172.17.42.1:4243`)
+
 If you are on OS X then see [How to use Docker on OS X](DockerOnOSX.md).
 
 e.g. to startup 5 Fabric8 instances; each will get their own IP address etc:
