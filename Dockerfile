@@ -15,6 +15,8 @@ ENV FABRIC8_RUNTIME_ID root
 ENV FABRIC8_KARAF_NAME root
 ENV FABRIC8_BINDADDRESS 0.0.0.0
 ENV FABRIC8_PROFILES docker
+ENV FABRIC8_HTTP_PORT 8181
+ENV FABRIC8_HTTP_PROXY_PORT 8181
 
 # add a user for the application, with sudo permissions
 RUN useradd -m fabric8 ; echo fabric8: | chpasswd ; usermod -a -G wheel fabric8
