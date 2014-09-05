@@ -1,6 +1,6 @@
 FROM debian:stable
 
-RUN apt-get update && apt-get install -y --no-install-recommends openjdk-7-jre-headless tar curl && apt-get autoremove -y && apt-get clean
+RUN apt-get update && apt-get install -y --no-install-recommends procps openjdk-7-jre-headless tar curl && apt-get autoremove -y && apt-get clean
 
 ENV FABRIC8_DISTRO_VERSION 1.2.0.Beta2
 ENV JAVA_HOME /usr/lib/jvm/java-1.7.0-openjdk-amd64
