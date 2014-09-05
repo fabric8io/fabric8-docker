@@ -35,7 +35,7 @@ RUN sed -i 's/log4j.rootLogger=INFO, out, osgi:*/log4j.rootLogger=INFO, stdout, 
 
 WORKDIR /home/fabric8/fabric8-karaf
 
-RUN chown -R fabric8:fabric8 /home/fabric8 /home/fabric8/*
+RUN chown -R fabric8:fabric8 /home/fabric8 /home/fabric8/fabric8-karaf /home/fabric8/startup.sh
 
 USER fabric8
 
