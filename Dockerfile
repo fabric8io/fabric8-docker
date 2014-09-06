@@ -13,20 +13,15 @@ RUN mkdir /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION
 RUN cd /opt && curl https://repo1.maven.org/maven2/io/fabric8/fabric8-karaf/$FABRIC8_DISTRO_VERSION/fabric8-karaf-$FABRIC8_DISTRO_VERSION.tar.gz | \
   tar zx && chown -R fabric8:fabric8 /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION
 
-RUN ls -al /opt
-RUN ls -al /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION
-
 # Make sure the distribution is available from a well-known place
 RUN ln -s /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION /opt/fabric8 && chown -R fabric8:fabric8 /opt/fabric8
-
-RUN ls -al /opt/fabric8
 
 ADD startup.sh /opt/fabric8/startup.sh
 
 # TODO temporary fix for docker issue until 1.2.0.Beta3
 ADD jetty.xml /opt/fabric8/fabric/import/fabric/profiles/default.profile/jetty.xml
 
-RUN chown -R fabric8:fabric8 /opt/fabric8 /opt/fabric8 /opt/fabric8/startup.sh /opt/fabric8/*
+RUN chown -R fabric8:fabric8 /opt/fabric8 /opt/fabric8/startup.sh /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION/*
 
 USER fabric8
 
