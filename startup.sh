@@ -15,4 +15,4 @@ echo Using bindaddress:             $FABRIC8_BINDADDRESS
 echo "admin=${ADMIN_USERNAME},${ADMIN_PASSWORD}" >> users.properties
 
 # Use exec to replace shell with process to ensure signals get handled correctly
-exec /home/fabric8/fabric8-karaf/bin/fabric8 server
+exec /opt/fabric8/bin/fabric8 server
