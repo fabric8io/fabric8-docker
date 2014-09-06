@@ -25,23 +25,19 @@ RUN chown -R fabric8:fabric8 /opt/fabric8 /opt/fabric8/startup.sh /opt/fabric8-k
 
 USER fabric8
 
-WORKDIR /opt/fabric8/etc
-
 # lets remove the karaf.name by default so we can default it from env vars
-RUN sed -i '/karaf.name=root/d' system.properties 
-RUN sed -i '/runtime.id=/d' system.properties 
+RUN sed -i '/karaf.name=root/d' /opt/fabric8/etc/system.properties 
+RUN sed -i '/runtime.id=/d' /opt/fabric8/etc/system.properties 
 
-RUN echo bind.address=0.0.0.0 >> system.properties
-RUN echo fabric.environment=docker >> system.properties
-RUN echo zookeeper.password.encode=true >> system.properties
+RUN echo bind.address=0.0.0.0 >> /opt/fabric8/etc/system.properties
+RUN echo fabric.environment=docker >> /opt/fabric8/etc/system.properties
+RUN echo zookeeper.password.encode=true >> /opt/fabric8/etc/system.properties
 
 # lets remove the karaf.delay.console=true to disable the progress bar
-RUN sed -i 's/karaf.delay.console=true/karaf.delay.console=false/' config.properties 
+RUN sed -i 's/karaf.delay.console=true/karaf.delay.console=false/' /opt/fabric8/etc/config.properties 
 
 # lets enable logging to standard out
-RUN sed -i 's/log4j.rootLogger=INFO, out, osgi:*/log4j.rootLogger=INFO, stdout, osgi:*/' org.ops4j.pax.logging.cfg
-
-WORKDIR /opt/fabric8
+RUN sed -i 's/log4j.rootLogger=INFO, out, osgi:*/log4j.rootLogger=INFO, stdout, osgi:*/' /opt/fabric8/etc/org.ops4j.pax.logging.cfg
 
 # default values of environment variables supplied by default for child containers created by fabric8
 # which have sensible defaults for folks creating new fabrics but can be overloaded when using docker run
