@@ -26,6 +26,12 @@ You can then run **docker attach** or **docker logs** to get the logs at any tim
 Run  **docker ps** to see all the running containers or **docker inspect $containerID** to view the IP address and details of a container
 
 
+Known issues
+------------
+
+* there is a [known issue](https://github.com/boot2docker/boot2docker/issues/527) with the use of boot2docker where permissions are not setup correctly so the fabric8 cannot startup. Works fine on linux though!
+* DOCKER_HOST must point to a TCP / HTTP endpoint for now; we don't yet support using unix sockets to communicate with the Docker REST API.
+
 Using the interactive shell
 ---------------------------
 
