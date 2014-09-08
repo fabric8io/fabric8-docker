@@ -2,7 +2,7 @@ FROM debian:stable
 
 RUN apt-get update && apt-get install -y --no-install-recommends procps openjdk-7-jre-headless tar curl && apt-get autoremove -y && apt-get clean
 
-ENV FABRIC8_DISTRO_VERSION 1.2.0.Beta2
+ENV FABRIC8_DISTRO_VERSION 1.2.0.Beta3
 ENV JAVA_HOME /usr/lib/jvm/java-1.7.0-openjdk-amd64
 
 # create the fabric8 user and group
@@ -19,7 +19,7 @@ RUN ln -s /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION /opt/fabric8 && chown -R fa
 ADD startup.sh /opt/fabric8/startup.sh
 
 # TODO temporary fix for docker issue until 1.2.0.Beta3
-ADD jetty.xml /opt/fabric8/fabric/import/fabric/profiles/default.profile/jetty.xml
+#ADD jetty.xml /opt/fabric8/fabric/import/fabric/profiles/default.profile/jetty.xml
 
 RUN chown -R fabric8:fabric8 /opt/fabric8 /opt/fabric8/startup.sh /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION/*
 
