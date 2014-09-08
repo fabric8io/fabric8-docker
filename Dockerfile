@@ -18,10 +18,10 @@ RUN ln -s /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION /opt/fabric8 && chown -R fa
 
 ADD startup.sh /opt/fabric8/startup.sh
 
-# TODO temporary fix for docker issue until 1.2.0.Beta3
-#ADD jetty.xml /opt/fabric8/fabric/import/fabric/profiles/default.profile/jetty.xml
-
 RUN chown -R fabric8:fabric8 /opt/fabric8 /opt/fabric8/startup.sh /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION/*
+
+# TODO work around from boot2docker bug which seems to not chown /opt/fabric8 or /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION and keeps it owned by only root:root
+RUN chmod 777 /opt/fabric8 /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION
 
 USER fabric8
 
@@ -53,5 +53,8 @@ ENV FABRIC8_HTTP_PROXY_PORT 8181
 ENV FABRIC8_GLOBAL_RESOLVER localip
 
 EXPOSE 1099 2181 8101 8181 9300 9301 44444 61616
+
+# lets default to the fabric8 dir so folks can more easily navigate to the data/logs
+WORKDIR /opt/fabric8
 
 CMD /opt/fabric8/startup.sh
