@@ -8,6 +8,7 @@ Try it out
 
 If you have docker installed you should be able to try it out via
 
+    docker pull fabric8/fabric8
     docker run -Pdt -e DOCKER_HOST=http://192.168.59.103:2375 fabric8/fabric8
 
 Where the value of DOCKER_HOST should be the URL (ideally http) where the docker container can access the [Docker Remote API](https://docs.docker.com/reference/api/docker_remote_api/) to be able to create/start/stop containers in docker.
