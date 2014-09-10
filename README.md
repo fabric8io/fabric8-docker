@@ -9,9 +9,15 @@ Try it out
 If you have docker installed you should be able to try it out via
 
     docker pull fabric8/fabric8
-    docker run -Pit -e DOCKER_HOST=http://192.168.59.103:2375 fabric8/fabric8
+    docker run --name myfabric -Pit -e DOCKER_HOST=http://192.168.59.103:2375 fabric8/fabric8
 
 Where the value of DOCKER_HOST should be the URL (ideally http) where the docker container can access the [Docker Remote API](https://docs.docker.com/reference/api/docker_remote_api/) to be able to create/start/stop containers in docker.
+
+To find the port to connect to the web console try:
+
+    docker port myfabric 8181
+
+You may wish to replace the 0.0.0.0 address with the actual ip address of your DOCKER_HOST.
 
 You can pass in various [environment variables](http://fabric8.io/gitbook/environmentVariables.html) to customise how a fabric is created or joined; or specify stand alone mode if required etc.
 
