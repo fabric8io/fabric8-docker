@@ -20,10 +20,10 @@ ADD startup.sh /opt/fabric8/startup.sh
 
 RUN chown -R fabric8:fabric8 /opt/fabric8 /opt/fabric8/startup.sh /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION/*
 
-# TODO work around from boot2docker bug which seems to not chown /opt/fabric8 or /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION and keeps it owned by only root:root
-RUN chmod 777 /opt/fabric8-karaf-$FABRIC8_DISTRO_VERSION
-
-USER fabric8
+# TODO we have an issue with permissions and ownership on boot2docker:
+# https://github.com/boot2docker/boot2docker/issues/527
+# so for now lets just run as root
+#USER fabric8
 
 # lets remove the karaf.name by default so we can default it from env vars
 RUN sed -i '/karaf.name=root/d' /opt/fabric8/etc/system.properties 
