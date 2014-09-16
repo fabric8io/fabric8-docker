@@ -25,10 +25,6 @@ RUN chown -R fabric8:fabric8 /opt/fabric8 /opt/fabric8/startup.sh /opt/fabric8-k
 # so for now lets just run as root
 #USER fabric8
 
-# lets remove the karaf.name by default so we can default it from env vars
-RUN sed -i '/karaf.name=root/d' /opt/fabric8/etc/system.properties 
-RUN sed -i '/runtime.id=/d' /opt/fabric8/etc/system.properties 
-
 RUN echo bind.address=0.0.0.0 >> /opt/fabric8/etc/system.properties
 RUN echo fabric.environment=docker >> /opt/fabric8/etc/system.properties
 RUN echo zookeeper.password.encode=true >> /opt/fabric8/etc/system.properties
